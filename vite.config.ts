@@ -1,4 +1,7 @@
 import { defineConfig } from 'vite';
+import { config } from 'dotenv';
+
+config();
 
 export default defineConfig({
   build: {
@@ -11,8 +14,13 @@ export default defineConfig({
       },
       output: {
         entryFileNames: 'index.js',
-        format: 'iife',
+        format: 'cjs', // CommonJS形式に変更
       },
+      external: ['discord.js', 'dotenv'],
     },
+  },
+  define: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'process.env': process.env,
   },
 });
